@@ -1,0 +1,49 @@
+<?php
+/*
+ * Copyright (c) 2025 Bloxtor (http://bloxtor.com) and Joao Pinto (http://jplpinto.com)
+ * 
+ * Multi-licensed: BSD 3-Clause | Apache 2.0 | GNU LGPL v3 | HLNC License (http://bloxtor.com/LICENSE_HLNC.md)
+ * Choose one license that best fits your needs.
+ *
+ * Original Bloxtor Repo: https://github.com/a19836/bloxtor
+ *
+ * YOU ARE NOT AUTHORIZED TO MODIFY OR REMOVE ANY PART OF THIS NOTICE!
+ */
+
+include_once get_lib("compression.IFileCompressionHandler");
+
+class GzipstreamFileCompressionHandler implements IFileCompressionHandler {
+	protected $file_pointer = null;
+	protected $deflate_context;
+	
+	public function __construct() {
+		if (!function_exists("deflate_init"))
+			throw new Exception("Gzipstream lib is not installed or deflate_init function does NOT exists!");
+	}
+	
+	public function open($file_path) {
+		$this->file_pointer = fopen($file_path, "wb");
+		
+		if ($this->file_pointer === false)
+			throw new Exception("Could not open file! Please check if the '" . basename($file_path) . "' file is writeable...");
+	
+		$this->deflate_context = deflate_init(ZLIB_ENCODING_GZIP, array('level' => 9));
+		return true;
+	}
+
+	public function write($str) {
+		$bytes = fwrite($this->file_pointer, deflate_add($this->deflate_context, $str, ZLIB_NO_FLUSH));
+		
+		if ($bytes === false)
+			throw new Exception("Could not write to file! Please check if you have enough free space...");
+		
+		return $bytes;
+	}
+
+	public function close() {
+		fwrite($this->file_pointer, deflate_add($this->deflate_context, '', ZLIB_FINISH));
+		
+		return fclose($this->file_pointer);
+	}
+}
+?>
