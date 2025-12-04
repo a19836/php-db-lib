@@ -210,7 +210,7 @@ $DBDriver->setOptions($options, $launch_exception = false);
 $DBDriver->setData($sql, $options);
 $DBDriver->setSQL($sql, $options);
 $DBDriver->execute($sql, $options); 
-$DBDriver->setConnectionEncoding(\'utf8\'); 
+$DBDriver->setConnectionEncoding('utf8'); 
 $DBDriver->selectDB($table_name);
 $DBDriver->createDB($db_name, $options = false);
 
@@ -273,7 +273,7 @@ $sql = $DBDriver->buildTableFindRelationshipSQL($table_name, $rel_elm, $parent_c
 $sql = $DBDriver->buildTableCountRelationshipSQL($table_name, $rel_elm, $parent_conditions, $options);
 $sql = $DBDriver->buildTableFindColumnMaxSQL($table_name, $attribute_name, $options);
 
-//Driver Getters - Driver STATIC Methods - can be called through \'$DBDriver->\' or \'XXXDBStatic::\' (i.e: \'MySqlDBStatic::\')
+//Driver Getters - Driver STATIC Methods - can be called through '$DBDriver->' or 'XXXDBStatic::' (i.e: 'MySqlDBStatic::')
 $type = $DBDriver->getType();
 $label = $DBDriver->getLabel();
 $delimiters = $DBDriver->getEnclosingDelimiters();
@@ -310,7 +310,7 @@ $status = $DBDriver->allowTableAttributeSorting();
 $status = $DBDriver->allowModifyTableEncoding();
 $status = $DBDriver->allowModifyTableStorageEngine();
 
-//Driver Statements - Driver STATIC Methods - can be called through \'$DBDriver->\' or \'XXXDBStatement::\' (i.e: \'MySqlDBStatement::\')
+//Driver Statements - Driver STATIC Methods - can be called through '$DBDriver->' or 'XXXDBStatement::' (i.e: 'MySqlDBStatement::')
 $sql = $DBDriver->getCreateDBStatement($db_name, $options);
 $sql = $DBDriver->getDropDatabaseStatement($db_name, $options);
 $sql = $DBDriver->getSelectedDBStatement($options);
