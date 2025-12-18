@@ -1,7 +1,7 @@
 # PHP DB Lib
 
 > Original Repos:   
-> - PHP DB Lib: https://github.com/a19836/phpdblib/   
+> - PHP DB Lib: https://github.com/a19836/php-db-lib/   
 > - Bloxtor: https://github.com/a19836/bloxtor/
 
 ## Overview
